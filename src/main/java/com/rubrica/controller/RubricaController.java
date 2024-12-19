@@ -2,8 +2,8 @@ package com.rubrica.controller;
 
 import java.util.Vector;
 
-import com.rubrica.model.Persona;
 import com.rubrica.model.RubricaModel;
+import com.rubrica.model.classes.Persona;
 import com.rubrica.view.RubricaView;
 
 public class RubricaController {

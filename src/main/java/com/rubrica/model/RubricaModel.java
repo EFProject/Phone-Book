@@ -2,6 +2,7 @@ package com.rubrica.model;
 import java.sql.SQLException;
 import java.util.Vector;
 
+import com.rubrica.model.classes.Persona;
 import com.rubrica.model.database.DAO.PersonaDAO;
 
 public class RubricaModel {

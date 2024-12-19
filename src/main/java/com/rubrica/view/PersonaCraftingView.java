@@ -1,8 +1,9 @@
 package com.rubrica.view;
 
-import com.rubrica.model.Persona;
-
 import javax.swing.*;
+
+import com.rubrica.model.classes.Persona;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

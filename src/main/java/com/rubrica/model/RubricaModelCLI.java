@@ -6,6 +6,8 @@ package com.rubrica.model;
 import java.util.Scanner;
 import java.util.Vector;
 
+import com.rubrica.model.classes.Persona;
+
 public class RubricaModelCLI {
 
     private Vector<Persona> contatti;

@@ -1,4 +1,4 @@
-package com.rubrica.model;
+package com.rubrica.model.classes;
 
 public class Persona 
 {

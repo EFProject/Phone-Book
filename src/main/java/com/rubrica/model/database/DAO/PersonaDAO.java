@@ -3,7 +3,7 @@ package com.rubrica.model.database.DAO;
 import java.sql.*;
 import java.util.Vector;
 
-import com.rubrica.model.Persona;
+import com.rubrica.model.classes.Persona;
 
 public class PersonaDAO {
 

@@ -5,11 +5,11 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.rubrica.controller.RubricaController;
-import com.rubrica.model.RubricaModel;
+import com.rubrica.controller.LoginController;
+import com.rubrica.model.LoginModel;
 import com.rubrica.model.database.DatabaseConnection;
-import com.rubrica.model.database.DAO.PersonaDAO;
-import com.rubrica.view.RubricaView;
+import com.rubrica.model.database.DAO.UtenteDAO;
+import com.rubrica.view.LoginView;
 
 
 public class MainApp {
@@ -20,16 +20,16 @@ public class MainApp {
                 // Configurazione connessione al database
                 Connection connection = DatabaseConnection.getConnection();
                 
-                // Creazione del DAO e del modello
-                PersonaDAO personaDAO = new PersonaDAO(connection);
-                RubricaModel model = new RubricaModel(personaDAO);
+                // Creazione del DAO e del modello Utente
+                UtenteDAO utenteDAO = new UtenteDAO(connection);
+                LoginModel loginModel = new LoginModel(utenteDAO);
                 
-                // Creazione della view e del controller
-                RubricaView view = new RubricaView();
-                new RubricaController(model, view);
+                // Creazione della view e del controller Utente
+                LoginView loginView = new LoginView();
+                new LoginController(loginModel, loginView);
                 
                 // Mostra la view
-                view.setVisible(true);
+                loginView.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(null, 

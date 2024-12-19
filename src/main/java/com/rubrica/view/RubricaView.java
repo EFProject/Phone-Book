@@ -1,7 +1,7 @@
 package com.rubrica.view;
 
 import com.rubrica.controller.RubricaController;
-import com.rubrica.model.Persona;
+import com.rubrica.model.classes.Persona;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
