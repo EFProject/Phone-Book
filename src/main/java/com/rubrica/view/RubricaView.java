@@ -7,17 +7,19 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
+import java.util.Objects;
 
 public class RubricaView extends JFrame {
     private JTable table;
     private DefaultTableModel tableModel;
-    private JButton btnNuovo, btnModifica, btnElimina;
+    private JButton btnAdd, btnUpdate, btnDelete;
 
     public RubricaView() {
         setTitle("Rubrica Telefonica");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(600, 400);
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout(10, 10));
+        setLocationRelativeTo(null); // Centra la finestra sullo schermo
 
         // Table
         tableModel = new DefaultTableModel(new Object[]{"Nome", "Cognome", "Telefono"}, 0) {
@@ -27,22 +29,32 @@ public class RubricaView extends JFrame {
             }
         };
         table = new JTable(tableModel);
+        table.setFillsViewportHeight(true);
         add(new JScrollPane(table), BorderLayout.CENTER);
 
-        // Panel buttons
-        JPanel panel = new JPanel();
-        btnNuovo = new JButton("Nuovo");
-        btnModifica = new JButton("Modifica");
-        btnElimina = new JButton("Elimina");
-        panel.add(btnNuovo);
-        panel.add(btnModifica);
-        panel.add(btnElimina);
-        add(panel, BorderLayout.SOUTH);
+        // ToolBar
+        JToolBar toolBar = new JToolBar();
+        toolBar.setFloatable(false);
+        toolBar.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        
+        ImageIcon addIcon = resizeIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/add.png"))));
+        ImageIcon editIcon = resizeIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/edit.png"))));
+        ImageIcon deleteIcon = resizeIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/delete.png"))));
+
+        btnAdd = new JButton("Nuovo", addIcon);
+        toolBar.add(btnAdd);
+        btnUpdate = new JButton("Modifica", editIcon);
+        toolBar.add(btnUpdate);
+        btnDelete = new JButton("Elimina", deleteIcon);
+        toolBar.add(btnDelete);
+
+        add(toolBar, BorderLayout.NORTH);
+
     }
 
     public void setController(RubricaController controller) {
 
-        btnNuovo.addActionListener(_ -> {
+        btnAdd.addActionListener(_ -> {
 
             PersonaCraftingView editor = new PersonaCraftingView(this, null);
             editor.setVisible(true); // Block execution untile closure
@@ -52,7 +64,7 @@ public class RubricaView extends JFrame {
 
         });
 
-        btnModifica.addActionListener(_ -> {
+        btnUpdate.addActionListener(_ -> {
 
             int selectedRow = table.getSelectedRow();
 
@@ -71,7 +83,7 @@ public class RubricaView extends JFrame {
 
         });
 
-        btnElimina.addActionListener(_ -> {
+        btnDelete.addActionListener(_ -> {
             int selectedRow = table.getSelectedRow();
             if (selectedRow >= 0) {
                 Persona personaSelezionata = controller.getContatti().get(selectedRow);
@@ -103,5 +115,11 @@ public class RubricaView extends JFrame {
         for (Persona persona : contatti) {
             tableModel.addRow(new Object[]{persona.getNome(), persona.getCognome(), persona.getTelefono()});
         }
+    }
+
+    private ImageIcon resizeIcon(ImageIcon icon) {
+        Image img = icon.getImage();
+        Image resizedImage = img.getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
     }
 }

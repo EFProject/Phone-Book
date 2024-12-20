@@ -23,6 +23,17 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+            <archive>
+                <manifest>
+                    <mainClass>com.rubrica.MainApp</mainClass>
+                </manifest>
+            </archive>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.4.1</version>
@@ -33,15 +44,18 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <archive>
-                <manifestEntries>
-                  <Main-Class>com.rubrica.MainApp</Main-Class>
-                </manifestEntries>
-              </archive>
               <createDependencyReducedPom>false</createDependencyReducedPom>
             </configuration>
           </execution>
         </executions>
+      </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+              <mainClass>com.rubrica.MainApp</mainClass>
+          </configuration>
       </plugin>
     </plugins>
   </build>
